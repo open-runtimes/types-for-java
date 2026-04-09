@@ -1,0 +1,39 @@
+plugins {
+    id "java-library"
+    id "io.github.gradle-nexus.publish-plugin" version "1.3.0"
+}
+
+ext {
+    PUBLISH_GROUP_ID = 'io.openruntimes'
+    PUBLISH_ARTIFACT_ID = 'types-for-java'
+    PUBLISH_VERSION = System.getenv('SDK_VERSION') ?: '0.0.0'
+    POM_URL = 'https://github.com/open-runtimes/types-for-java'
+    POM_SCM_URL = 'https://github.com/open-runtimes/types-for-java'
+    POM_ISSUE_URL = 'https://github.com/open-runtimes/types-for-java/issues'
+    POM_DESCRIPTION = 'Types for Java Open Runtime'
+    POM_LICENSE_URL = 'https://opensource.org/licenses/MIT'
+    POM_LICENSE_NAME = 'MIT'
+    POM_DEVELOPER_ID = 'open-runtimes'
+    POM_DEVELOPER_NAME = 'Open Runtimes Team'
+    POM_DEVELOPER_EMAIL = 'team@appwrite.io'
+    GITHUB_SCM_CONNECTION = 'scm:git:git://github.com/open-runtimes/types-for-java.git'
+}
+
+group = PUBLISH_GROUP_ID
+version = PUBLISH_VERSION
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    api 'com.google.code.gson:gson:2.13.1'
+}
+
+apply from: "${rootDir}/scripts/setup.gradle"
+apply from: "${rootDir}/scripts/publish.gradle"
